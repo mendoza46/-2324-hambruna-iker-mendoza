@@ -14,7 +14,8 @@ const fetchAsyncData = async () => {
         // carbohydrateAverage(result);
         // saturatedFatSum(result);
         // averageVitamine(result);
-        batterList(result);
+        // batterList(result);
+        toppingList(result);
     } catch (error){
         console.log(error.message)
     }
@@ -191,4 +192,15 @@ const batterList = (result) => {
         console.log("butter: " + butterType )
     });
     console.log(batter)
+}
+
+const toppingList = (result) => {
+
+    const topping = result.items.item.map(element => {
+        const toppingType = element.topping.map(topping => topping.type)
+        console.log(`--------`)
+        console.log(element.name)
+        console.log("butter: " + toppingType )
+    });
+    console.log(topping)
 }
