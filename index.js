@@ -7,7 +7,8 @@ const fetchAsyncData = async () => {
     try{
         const result = await getAllDonuts();
         // maxSugar(result);
-        maxIron(result);
+        // maxIron(result);
+        maxProteine(result);
     } catch (error){
         console.log(error.message)
     }
@@ -53,4 +54,16 @@ const maxIron = (result) => {
     });
  
     console.log(`El donut con más hierro es ${findNumber[findNumber.length - 1]}`);
+}
+
+const maxProteine = (result) => {
+    const proteineNum = result.items.item.map(element => {
+        const proteinNumber = element.nutrition_facts.nutrition.proteine.substring(0, element.nutrition_facts.nutrition.proteine.length - 1)
+        return Number(proteinNumber);
+    })
+    const proteineMax = Math.max(...proteineNum);
+
+    const findNumber = result.items.item.filter(element => proteineMax == element.nutrition_facts.nutrition.proteine.substring(0, element.nutrition_facts.nutrition.proteine.length - 1));
+
+    console.log(`El donut con mas proteina es ${findNumber[0].name}`);
 }
