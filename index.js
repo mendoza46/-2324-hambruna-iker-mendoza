@@ -9,7 +9,8 @@ const fetchAsyncData = async () => {
         // maxSugar(result);
         // maxIron(result);
         // maxProteine(result);
-        minFibre(result);
+        // donutCalories(result);
+        donutCarbohydrate(result);
     } catch (error){
         console.log(error.message)
     }
@@ -84,5 +85,21 @@ const minFibre = (result) => {
             console.log("-"+element.name)
             return element.name;
         }
+    });
+}
+
+const donutCalories = (result) => {
+
+    result.items.item.forEach(element => {
+        console.log(``);
+        console.log(`${element.name} => Calories: ${element.nutrition_facts.nutrition.calories}`);
+    });
+}
+
+const donutCarbohydrate = (result) => {
+
+    result.items.item.forEach(element => {
+        console.log(`${element.name} => Carbohydrates: `);
+        console.log(element.nutrition_facts.nutrition.carbohydrate.carbs_detail);
     });
 }
