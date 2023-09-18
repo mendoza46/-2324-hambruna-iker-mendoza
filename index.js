@@ -6,7 +6,8 @@ const getAllDonuts = async () => {
 const fetchAsyncData = async () => {
     try{
         const result = await getAllDonuts();
-        maxSugar(result);
+        // maxSugar(result);
+        maxIron(result);
     } catch (error){
         console.log(error.message)
     }
@@ -15,16 +16,32 @@ const fetchAsyncData = async () => {
 fetchAsyncData();
 
 const maxSugar = (result) => {
-    const resultado = result.items.item.map(element => {
+    const sugarNum = result.items.item.map(element => {
         const sugarNumber = element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars.substring(0, 2)
         const stringNumber = Number(sugarNumber);
         return stringNumber;
     })
 
-    const sugarMax = Math.max(...resultado);
+    const sugarMax = Math.max(...sugarNum);
 
     const findNumber = result.items.item.filter(element => sugarMax == element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars.substring(0, 2));
     
     console.log(`El donut con mas azúcar es ${findNumber[0].name}`);
     
+}
+
+const maxIron = (result) => {
+    const ironNum = result.items.item.map(element => {
+        const typeIron = element.nutrition_facts.nutrition.vitamines.filter( vitamine => 'Iron' === vitamine.type)
+        let ironPercent = typeIron[0].percent.substring(0, typeIron[0].percent.length - 1);
+        const stringNumber = Number(ironPercent);
+        return stringNumber;
+    })
+
+    const ironMax = Math.max(...ironNum);
+
+    const findNumber = result.items.item.map(element => {
+
+    });
+    console.log(findNumber)
 }
