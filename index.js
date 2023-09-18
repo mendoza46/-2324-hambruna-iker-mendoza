@@ -15,7 +15,10 @@ const fetchAsyncData = async () => {
         // saturatedFatSum(result);
         // averageVitamine(result);
         // batterList(result);
-        toppingList(result);
+        // toppingList(result);
+        // donutBuy(result);
+        // modifyFatTrans(result);
+        modifyMoreThan50Sugar(result);
     } catch (error){
         console.log(error.message)
     }
@@ -203,4 +206,46 @@ const toppingList = (result) => {
         console.log("butter: " + toppingType )
     });
     console.log(topping)
+}
+
+const donutBuy = (result) => {
+
+    const topping = result.items.item.map(element => element.ppu);
+
+    for(let j = 0; j < topping.length; j++){
+        let suma = 0;
+        let i = 0;
+        for(i; i < 10; i++){
+            suma = suma + topping[j]
+            if(suma >= 4){
+                break;
+            }
+        }
+        console.log(`${result.items.item[j].name}, puedes comprar ${i} donuts y las monedas restantes son ${suma - 4}`)
+    }
+   
+    
+}
+
+const modifyFatTrans = (result) => {
+
+    result.items.item.forEach(element => {
+        let cholesterolNumber = Number(element.nutrition_facts.nutrition.cholesterol.daily_value.substring(0, element.nutrition_facts.nutrition.cholesterol.daily_value.length - 1))
+        if(cholesterolNumber  > 12){
+            element.nutrition_facts.nutrition.fat.fat_type.trans = "3.2g";
+        }
+        console.log(`${element.name}: ${element.nutrition_facts.nutrition.fat.fat_type.trans}`)
+    })
+}
+
+const modifyMoreThan50Sugar = (result) => {
+
+    result.items.item.forEach(element => {
+        let sugarNumber = Number(element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars.substring(0, element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars.length - 1))
+        // console.log(sugarNumber)
+        if(sugarNumber  > 50){
+            element.nutrition_facts.nutrition.carbohydrate.carbs_detail.amount = "42g";
+        }
+        console.log(`${element.name}: ${element.nutrition_facts.nutrition.carbohydrate.carbs_detail.amount}`)
+    })
 }
