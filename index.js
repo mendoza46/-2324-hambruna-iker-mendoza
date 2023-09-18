@@ -10,7 +10,8 @@ const fetchAsyncData = async () => {
         // maxIron(result);
         // maxProteine(result);
         // donutCalories(result);
-        donutCarbohydrate(result);
+        // donutCarbohydrate(result);
+        carbohydrateAverage(result);
     } catch (error){
         console.log(error.message)
     }
@@ -102,4 +103,12 @@ const donutCarbohydrate = (result) => {
         console.log(`${element.name} => Carbohydrates: `);
         console.log(element.nutrition_facts.nutrition.carbohydrate.carbs_detail);
     });
+}
+
+const carbohydrateAverage = (result) => {
+
+    const calories = result.items.item.map(element => element.nutrition_facts.nutrition.calories );
+    let total = calories.reduce((a, b) => a + b, 0);
+    const average = total / calories.length;
+    console.log(`La media de calorías de todos los donuts es: ${average}`);
 }
