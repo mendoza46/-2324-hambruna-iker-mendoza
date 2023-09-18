@@ -13,7 +13,8 @@ const fetchAsyncData = async () => {
         // donutCarbohydrate(result);
         // carbohydrateAverage(result);
         // saturatedFatSum(result);
-        averageVitamine(result);
+        // averageVitamine(result);
+        batterList(result);
     } catch (error){
         console.log(error.message)
     }
@@ -179,4 +180,15 @@ const averageVitamine = (result) => {
     console.log(`Porcentaje medio de la vitamina C es ${totalVitaminC}%`) 
     console.log(`Porcentaje medio de la vitamina Calcium es ${totalVitaminCalcium}%`) 
     console.log(`Porcentaje medio de la vitamina Iron es ${totalVitaminIron}%`) 
+}
+
+const batterList = (result) => {
+
+    const batter = result.items.item.map(element => {
+        const butterType = element.batters.batter.map(butter => butter.type)
+        console.log(`--------`)
+        console.log(element.name)
+        console.log("butter: " + butterType )
+    });
+    console.log(batter)
 }
