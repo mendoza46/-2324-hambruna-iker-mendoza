@@ -41,7 +41,16 @@ const maxIron = (result) => {
     const ironMax = Math.max(...ironNum);
 
     const findNumber = result.items.item.map(element => {
-
+        let boolean = false;
+        element.nutrition_facts.nutrition.vitamines.filter(iron => {
+            if(iron.percent.substring(0, iron.percent.length - 1) == ironMax){
+                return boolean = true;
+            }
+        });
+        if(boolean === true){
+            return element.name;
+        }
     });
-    console.log(findNumber)
+ 
+    console.log(`El donut con más hierro es ${findNumber[findNumber.length - 1]}`);
 }
