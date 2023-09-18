@@ -8,7 +8,8 @@ const fetchAsyncData = async () => {
         const result = await getAllDonuts();
         // maxSugar(result);
         // maxIron(result);
-        maxProteine(result);
+        // maxProteine(result);
+        minFibre(result);
     } catch (error){
         console.log(error.message)
     }
@@ -66,4 +67,22 @@ const maxProteine = (result) => {
     const findNumber = result.items.item.filter(element => proteineMax == element.nutrition_facts.nutrition.proteine.substring(0, element.nutrition_facts.nutrition.proteine.length - 1));
 
     console.log(`El donut con mas proteina es ${findNumber[0].name}`);
+}
+
+const minFibre = (result) => {
+    const fibreNum = result.items.item.map(element => {
+        const sugarNumber = element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre.substring(0, element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre.length - 1)
+        const stringNumber = Number(sugarNumber);
+        return stringNumber;
+    })
+
+    const fibreMin = Math.min(...fibreNum);
+
+    console.log("Los donut con menos fibra son:")
+    result.items.item.filter(element => {
+        if(fibreMin == element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre.substring(0, element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre.length - 1)){
+            console.log("-"+element.name)
+            return element.name;
+        }
+    });
 }
