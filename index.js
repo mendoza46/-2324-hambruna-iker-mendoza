@@ -18,7 +18,8 @@ const fetchAsyncData = async () => {
         // toppingList(result);
         // donutBuy(result);
         // modifyFatTrans(result);
-        modifyMoreThan50Sugar(result);
+        // modifyMoreThan50Sugar(result);
+        createNewVitamine(result);
     } catch (error){
         console.log(error.message)
     }
@@ -242,10 +243,18 @@ const modifyMoreThan50Sugar = (result) => {
 
     result.items.item.forEach(element => {
         let sugarNumber = Number(element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars.substring(0, element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars.length - 1))
-        // console.log(sugarNumber)
         if(sugarNumber  > 50){
             element.nutrition_facts.nutrition.carbohydrate.carbs_detail.amount = "42g";
         }
         console.log(`${element.name}: ${element.nutrition_facts.nutrition.carbohydrate.carbs_detail.amount}`)
+    })
+}
+
+const createNewVitamine = (result) => {
+    const element = result.items.item.filter(element => {
+        if(element.name.substring(6, element.name.length) === "Fusion"){
+            element.nutrition_facts.nutrition.vitamines.name = "Nitacina";
+            console.log(element.nutrition_facts.nutrition.vitamines);
+        }
     })
 }
