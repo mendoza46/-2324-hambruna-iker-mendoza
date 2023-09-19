@@ -6,22 +6,11 @@ const getAllDonuts = async () => {
 const fetchAsyncData = async () => {
     try{
         const result = await getAllDonuts();
-        // maxSugar(result);
-        // maxIron(result);
-        // maxProteine(result);
-        // donutCalories(result);
-        // donutCarbohydrate(result);
-        // carbohydrateAverage(result);
-        // saturatedFatSum(result);
-        // averageVitamine(result);
-        // batterList(result);
-        // toppingList(result);
-        // donutBuy(result);
-        // modifyFatTrans(result);
-        // modifyMoreThan50Sugar(result);
-        // createNewVitamine(result);
-        // modifyDailyValue(result);
-        createNewAlergenAttribute(result);
+        // exercise1(result);
+        // exercise2(result);
+        // exercise3(result);
+        exercise4(result);
+        // exercise5(result);
     } catch (error){
         console.log(error.message)
     }
@@ -29,6 +18,58 @@ const fetchAsyncData = async () => {
 
 fetchAsyncData();
 
+const exercise1 = (result) => {
+    console.log(`Ejercicio 1: ----------------------------------`);
+    maxSugar(result);
+    console.log(``);
+    maxIron(result);
+    console.log(``);
+    maxProteine(result);
+    console.log(``);
+    minFibre(result);
+    console.log(``);
+}
+
+const exercise2 = (result) => {
+    console.log(`Ejercicio 2: ----------------------------------`);
+    donutCalories(result);
+    console.log(``);
+    donutCarbohydrate(result);
+    console.log(``);
+    carbohydrateAverage(result);
+    console.log(``);
+    saturatedFatSum(result);
+    console.log(``);
+    averageVitamine(result);
+    console.log(``);
+}
+
+const exercise3 = (result) => {
+    console.log(`Ejercicio 3: ----------------------------------`);
+    batterList(result);
+    console.log(``);
+    toppingList(result);
+    console.log(``);
+}
+
+const exercise4 = (result) => {
+    console.log(`Ejercicio 4: ----------------------------------`);
+    donutBuy(result);
+    console.log(``);
+}
+
+const exercise5 = (result) => {
+    console.log(`Ejercicio 5: ----------------------------------`);
+    modifyFatTrans(result);
+    console.log(``);
+    modifyMoreThan50Sugar(result);
+    console.log(``);
+    createNewVitamine(result);
+    console.log(``);
+    modifyDailyValue(result);
+    console.log(``);
+    createNewAlergenAttribute(result);
+}
 const maxSugar = (result) => {
     const sugarNum = result.items.item.map(element => {
         const sugarNumber = element.nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars.substring(0, 2)
@@ -191,35 +232,33 @@ const averageVitamine = (result) => {
 
 const batterList = (result) => {
 
-    const batter = result.items.item.map(element => {
+    result.items.item.map(element => {
         const butterType = element.batters.batter.map(butter => butter.type)
         console.log(`--------`)
         console.log(element.name)
         console.log("butter: " + butterType )
     });
-    console.log(batter)
 }
 
 const toppingList = (result) => {
 
-    const topping = result.items.item.map(element => {
+    result.items.item.map(element => {
         const toppingType = element.topping.map(topping => topping.type)
         console.log(`--------`)
         console.log(element.name)
         console.log("butter: " + toppingType )
     });
-    console.log(topping)
 }
 
 const donutBuy = (result) => {
 
-    const topping = result.items.item.map(element => element.ppu);
+    const donut = result.items.item.map(element => element.ppu);
 
-    for(let j = 0; j < topping.length; j++){
+    for(let j = 0; j < donut.length; j++){
         let suma = 0;
         let i = 0;
         for(i; i < 10; i++){
-            suma = suma + topping[j]
+            suma = suma + donut[j]
             if(suma >= 4){
                 break;
             }
