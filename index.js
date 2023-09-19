@@ -19,8 +19,9 @@ const fetchAsyncData = async () => {
         // donutBuy(result);
         // modifyFatTrans(result);
         // modifyMoreThan50Sugar(result);
-        createNewVitamine(result);
+        // createNewVitamine(result);
         // modifyDailyValue(result);
+        createNewAlergenAttribute(result);
     } catch (error){
         console.log(error.message)
     }
@@ -265,5 +266,15 @@ const modifyDailyValue = (result) => {
     result.items.item.map(element => {
         element.nutrition_facts.nutrition.carbohydrate.daily_value = "53%"
         console.log(`name: ${element.name},     daily_value: ${element.nutrition_facts.nutrition.carbohydrate.daily_value}`)
+    })
+}
+
+const createNewAlergenAttribute = (result) => {
+    result.items.item.map(element => {
+        let nameArray = element.name.split(' ');
+        if(nameArray[0] === 'Relaxing'){
+            element.alergen = "Gluten Free";
+            console.log(element)
+        }
     })
 }
