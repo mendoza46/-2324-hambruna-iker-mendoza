@@ -20,6 +20,7 @@ const fetchAsyncData = async () => {
         // modifyFatTrans(result);
         // modifyMoreThan50Sugar(result);
         createNewVitamine(result);
+        // modifyDailyValue(result);
     } catch (error){
         console.log(error.message)
     }
@@ -251,10 +252,18 @@ const modifyMoreThan50Sugar = (result) => {
 }
 
 const createNewVitamine = (result) => {
-    const element = result.items.item.filter(element => {
+    result.items.item.filter(element => {
         if(element.name.substring(6, element.name.length) === "Fusion"){
-            element.nutrition_facts.nutrition.vitamines.name = "Nitacina";
+            let newVitamine = {type: "Nitacina", percent: '0%'}
+            element.nutrition_facts.nutrition.vitamines.push(newVitamine);
             console.log(element.nutrition_facts.nutrition.vitamines);
         }
+    })
+}
+
+const modifyDailyValue = (result) => {
+    result.items.item.map(element => {
+        element.nutrition_facts.nutrition.carbohydrate.daily_value = "53%"
+        console.log(`name: ${element.name},     daily_value: ${element.nutrition_facts.nutrition.carbohydrate.daily_value}`)
     })
 }
