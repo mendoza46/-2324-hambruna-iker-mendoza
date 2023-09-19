@@ -6,11 +6,11 @@ const getAllDonuts = async () => {
 const fetchAsyncData = async () => {
     try{
         const result = await getAllDonuts();
-        // exercise1(result);
-        // exercise2(result);
-        // exercise3(result);
+        exercise1(result);
+        exercise2(result);
+        exercise3(result);
         exercise4(result);
-        // exercise5(result);
+        exercise5(result);
     } catch (error){
         console.log(error.message)
     }
@@ -253,20 +253,14 @@ const toppingList = (result) => {
 const donutBuy = (result) => {
 
     const donut = result.items.item.map(element => element.ppu);
-
-    for(let j = 0; j < donut.length; j++){
-        let suma = 0;
-        let i = 0;
-        for(i; i < 10; i++){
-            suma = suma + donut[j]
-            if(suma >= 4){
-                break;
-            }
-        }
-        console.log(`${result.items.item[j].name}, puedes comprar ${i} donuts y las monedas restantes son ${suma - 4}`)
-    }
-   
-    
+    let cont = 1;
+    donut.map(element => {
+        let times = Math.floor(4/element);
+        let usedMoney = times * element;
+        let result = 4 - usedMoney;
+        console.log(`donut ${cont}: puedes comprar ${times} donuts y las monedas restantes son ${result.toFixed(2)}`)
+        cont++;
+    })
 }
 
 const modifyFatTrans = (result) => {
